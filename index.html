@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f7f7f7;
+        }
+        .calculator {
+            background: #fff;
+            padding: 24px 32px 32px 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 320px;
+            margin: 60px auto;
+        }
+        .calculator input[type="number"] {
+            width: 120px;
+            padding: 6px;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+        .calculator select, .calculator button {
+            padding: 6px 12px;
+            font-size: 1em;
+            margin: 8px 0;
+        }
+        .result {
+            margin-top: 18px;
+            font-size: 1.2em;
+            color: #333;
+            min-height: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+        <form id="calcForm" onsubmit="return false;">
+            <input type="number" id="num1" required placeholder="First number">
+            <select id="operator">
+                <option value="+">+</option>
+                <option value="-">−</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+            </select>
+            <input type="number" id="num2" required placeholder="Second number">
+            <br>
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculate() {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var op = document.getElementById('operator').value;
+            var result = '';
+            if (isNaN(num1) || isNaN(num2)) {
+                result = 'Please enter valid numbers.';
+            } else {
+                switch(op) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 === 0) {
+                            result = 'Cannot divide by zero.';
+                        } else {
+                            result = num1 / num2;
+                        }
+                        break;
+                    default:
+                        result = 'Invalid operator.';
+                }
+            }
+            document.getElementById('result').textContent = 'Result: ' + result;
+        }
+    </script>
+</body>
+</html>
